@@ -1,0 +1,52 @@
+
+{% extends 'base.html' %}
+{% load static %}
+{% load tz %}
+
+{% block content %}
+<div class="table-container">
+    <h1>Estimated Price History</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Bedrooms</th>
+                <th>Bathrooms</th>
+                <th>Floors</th>
+                <th>Parking Vehicle</th>
+                <th>Road in Size</th>
+                <th>Road Type</th>
+                <th>Total Area</th>
+                <th>Predicted Price</th>
+                <th>Time</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for prediction in predictions %}
+                <tr>
+                    <td>{{ prediction.user.username }}</td>
+                    <td>{{ prediction.bedrooms }}</td>
+                    <td>{{ prediction.bathrooms }}</td>
+                    <td>{{ prediction.floors }}</td>
+                    <td>{{ prediction.parking }}</td>
+                    <td>{{ prediction.roadsize }}</td>
+                    <td>{{ prediction.road_type }}</td>
+                    <td>{{ prediction.area }}</td>
+                    <td>{{ prediction.predicted_price }}</td>
+                    <td>{% load tz %}{{ prediction.timestamp|timezone:"Asia/Kathmandu"|date:"N d, Y, P" }}</td>
+                    <td>
+                        <form action="{% url 'delete_prediction' prediction.id %}" method="post">
+                            {% csrf_token %}
+                            <button type="submit">Delete</button>
+                        </form>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}
+
+{% block extra_css %}
+    <link rel="stylesheet" type="text/css" href="{% static 'history.css' %}">
+{% endblock %}

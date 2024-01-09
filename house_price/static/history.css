@@ -1,0 +1,45 @@
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  /* Style table header */
+  th {
+    background-color: #f2f2f2;
+    font-weight: bold;
+    text-align: left;
+    padding: 8px;
+  }
+  
+  /* Style table rows */
+  tr:nth-child(even) {
+    background-color: #f9f9f9;
+  }
+  
+  /* Style table data cells */
+  td {
+    padding: 8px;
+  }
+  
+  /* Highlight on hover */
+  tr:hover {
+    background-color: #e6e6e6;
+  }
+
+  button[type="submit"] {
+    background-color: #ff4d4d; /* Red color */
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    cursor: pointer;
+    border-radius: 4px;
+    font-size: 14px;
+    transition: background-color 0.3s;
+  }
+  
+  /* Change button color on hover */
+  button[type="submit"]:hover {
+    background-color: #e60000; /* Darker red on hover */
+  }
+  

@@ -1,0 +1,18 @@
+
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+    <div class="result-container">
+        <h1>Prediction Result</h1>
+        <div class="price-container">
+            <p class="price-label">Estimated Price</p>
+            <p class="price"> Rs {{ predicted_price }}</p>
+            <p class="price-words">Price in words: Rs {{ predicted_price_words }}</p>
+        </div>
+    </div>
+{% endblock %}
+
+
+{% block extra_css %}
+    <link rel="stylesheet" type="text/css" href="{% static 'predict_result.css' %}">
+{% endblock %}

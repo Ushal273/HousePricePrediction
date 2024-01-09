@@ -1,0 +1,128 @@
+{% load static %}
+<html>
+<head>
+    <title></title>
+    <link rel="stylesheet" type="text/css" href="{% static 'login.css' %}">
+</head>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const form = document.querySelector('form');
+        form.addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            // Validation functions
+            function validateName(name) {
+                return /^[a-zA-Z]+$/.test(name); // Allows only alphabets
+            }
+
+            function validateUsername(username) {
+                return username.length >= 4; // At least 4 characters
+            }
+
+            function validateEmail(email) {
+                return /\S+@\S+\.\S+/.test(email); // Basic email format validation
+            }
+
+            function validatePassword(password) {
+                return /^(?=.*\d).{6,}$/.test(password); // At least 6 characters with one number
+            }
+
+            // Form data
+            const formData = new FormData(form);
+            const firstName = formData.get('first_name');
+            const lastName = formData.get('last_name');
+            const username = formData.get('username');
+            const email = formData.get('email');
+            const password = formData.get('password');
+            const confirmPassword = formData.get('c_password');
+
+            // Perform validation
+            if (!validateName(firstName) || !validateName(lastName)) {
+                alert('First and last name should contain only alphabets.');
+                return;
+            }
+
+            if (!validateUsername(username)) {
+                alert('Username should be at least 4 characters.');
+                return;
+            }
+
+            if (!validateEmail(email)) {
+                alert('Please enter a valid email address.');
+                return;
+            }
+
+            if (!validatePassword(password)) {
+                alert('Password should be at least 6 characters with at least one number.');
+                return;
+            }
+
+            if (password !== confirmPassword) {
+                alert('Passwords do not match.');
+                return;
+            }
+
+            // If all validations pass, submit the form
+            fetch(form.action, {
+                method: 'POST',
+                body: formData,
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.error) {
+                    alert(data.error);
+                } else if (data.success) {
+                    alert(data.success);
+                    window.location.href = '/login';
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+        });
+    });
+</script>
+
+<body>
+    <div class='wrapper'>
+        <div class='title'>
+            Register Here
+        </div>
+        <form method="POST" action="{% url 'registration' %}">
+            {% csrf_token %}
+                <div class= 'field'>
+                <input type="text" name="first_name" placeholder="Firstname" required>
+                </div>
+
+                <div class= 'field'>
+                <input type="text" name="last_name" placeholder="Lastname" required>
+                </div>
+
+                <div class='field'>
+                <input type='text' name="username" placeholder="Username" required>
+                </div>
+
+                <div class= 'field'>
+                <input type="text" name="email" placeholder="Email" required>
+                </div>
+        
+
+                <div class='field'>
+                <input type='password' name="password" placeholder="Password" required>
+                </div>
+
+                <div class= 'field'>
+                <input type="password" name="c_password" placeholder="Confirm your Password" required>
+                </div>
+
+                <div class='field'>
+                <input type='submit' value='Register'>
+                </div>
+
+               <div class='signup-link'>
+                Already have an account? <a href="{% url 'login' %}">Login</a>
+               </div>
+        </form>
+    </div>
+</body>
+</html>

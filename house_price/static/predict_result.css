@@ -1,0 +1,45 @@
+/* Custom Styles for Prediction Result */
+
+/* Custom Styles for Prediction Result */
+
+.result-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    background-color: #f0f0f0;
+    margin: 0;
+    padding: 0;
+}
+
+
+.price-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: #ffffff;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+}
+
+.price-label {
+    font-size: 28px;
+    color: #333333;
+    margin-bottom: 10px;
+}
+
+.price {
+    font-size: 48px;
+    font-weight: bold;
+    color: #ff5733;
+    margin: 15px 0;
+}
+
+.price-words {
+    font-size: 20px;
+    color: #555555;
+    text-align: center;
+}

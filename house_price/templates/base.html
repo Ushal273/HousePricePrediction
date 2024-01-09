@@ -1,0 +1,59 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Kathmandu House Price Prediction</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'navbar.css' %}">
+    {% block extra_css %}{% endblock %}
+</head>
+<body>
+    <nav>
+        <div class='nav-content'>
+            <div class='logo'>
+                <a href="#">HPP</a>
+            </div>
+            <ul class='nav-links'>
+                <li><a href="{% url 'home' %}">Home</a></li>
+                <li><a href="{% url 'predict' %}">Predict Price</a></li>
+                <li><a href="{% url 'contact' %}">Message</a></li>
+                <li><a href="{% url 'history' %}">History</a></li>
+                {% if request.user.is_authenticated %}
+                    <li><a href="#" style="color: white;">Hey, {{ request.user.username }}</a></li>
+                    <li><a href="#" onclick="confirmLogout()">Logout</a></li>
+                {% else %}
+                    <li><a href="{% url 'login' %}">Login</a></li>
+                    <li><a href="{% url 'registration' %}">Register</a></li>
+                {% endif %}
+            </ul>
+        </div>
+    </nav>
+    <br>
+
+    <!-- Content -->
+    <div class="content" style="padding-top: 80px;">
+        {% block content %}
+        {% endblock %}
+    </div>
+
+    <br>
+
+    <!-- Footer -->
+    {% block footer %}
+    {% include 'footer.html' %}
+    {% endblock %}
+
+    <!-- Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+        function confirmLogout() {
+            var confirmLogout = confirm("Do you want to log out?");
+            if (confirmLogout) {
+                window.location.href = "{% url 'logout' %}";
+            }
+        }
+    </script>
+<script>        
+</body>
+</html>

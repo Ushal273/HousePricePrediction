@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+{% load  static %}
+
+{% block content %}
+    
+    <div class="container">
+    <div class="form-container">
+        <h3>Kathmandu House Price Prediction</h3>
+    <form method="POST" action="{% url 'predict' %}">
+        {% csrf_token %}
+        <br>
+        <input type="text" name="bedrooms" placeholder="Total Number of Bedrooms">
+
+       <br><br>
+        <input type="text" name="bathrooms" placeholder="Total Number of Bathrooms">
+
+       <br><br>
+        <input type="text" name="floors" placeholder="Total Number of Floors">
+
+        <br><br>
+        <input type="text" name="parking" placeholder=" Total Number of Parking Vechiles">
+
+        <br><br>
+        <input type="text" name="roadsize" placeholder="Road size in feet">
+
+        <br><br>
+        <label for="road_type">Road Type:</label><br>
+        <select name="road_type">
+            <option value="1">Soil Stabilized</option>
+            <option value="2">Gravelled</option>
+            <option value="3">Concrete</option>
+            <option value="4">Pitch</option>
+        </select><br><br>
+
+        <input type="text" name="area" placeholder="Total Area in square feet">
+        <br><br>
+        <input type="submit" value="Predict">
+    </form>
+</div>
+</div>
+{% endblock %}
+
+
+{% block extra_css %}
+    <link rel="stylesheet" type="text/css" href="{% static 'predict.css' %}">
+{% endblock %}

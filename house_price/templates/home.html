@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Welcome to Home Page{% endblock %}
+
+{% block content %}
+    <div class="center-content">
+        <form method="POST" action="{% url 'predict' %}">
+            {% csrf_token %}
+            <button type="submit" class="predict-button">Predict Price</button>
+        </form>
+    </div>
+{% endblock %}
+
+
+{% block extra_css %}
+    <link rel="stylesheet" type="text/css" href="{% static 'home.css' %}">
+{% endblock %}
